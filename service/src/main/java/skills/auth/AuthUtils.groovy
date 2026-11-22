@@ -95,6 +95,9 @@ class AuthUtils {
     // Example: /admin/projects/{projectId}/approvals/reject
     static final Pattern PROJECT_SELF_REPORT_APPROVE_OR_REJECT_PATTERN = Pattern.compile("^/admin/projects/[^/]+/approvals/(?:approve|reject)\$")
 
+    // Example: /admin/projects/{projectId}/help/{id}/replies (also resolve, reopen)
+    static final Pattern PROJECT_HELP_ACTION_PATTERN = Pattern.compile("^/admin/projects/[^/]+/help/\\d+/(?:replies|resolve|reopen)\$")
+
     // Example: /admin/projects/{projectId}/approverConf
     static final Pattern PROJECT_SELF_REPORT_APPROVER_CONF_PATTERN = Pattern.compile("^/admin/projects/[^/]+/approverConf\$")
 
@@ -263,6 +266,11 @@ class AuthUtils {
         boolean isSelfReportAction() {
             boolean isRightMethod = httpMethod && (httpMethod == HttpMethod.POST.toString() || httpMethod == HttpMethod.PUT.toString())
             return isRightMethod && isSelfReportApproveOrRejectEndpoint()
+        }
+
+        boolean isHelpAction() {
+            boolean isRightMethod = httpMethod && httpMethod == HttpMethod.POST.toString()
+            return isRightMethod && requestPath && PROJECT_HELP_ACTION_PATTERN.matcher(requestPath).matches()
         }
 
         boolean isSelfReportEmailSubscriptionAction() {

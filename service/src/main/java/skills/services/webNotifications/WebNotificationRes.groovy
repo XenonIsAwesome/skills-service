@@ -25,4 +25,5 @@ class WebNotificationRes {
     Date notifiedOn
     String title
     String notification
+    String link
 }

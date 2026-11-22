@@ -31,6 +31,8 @@ import Subjects from '@/components/subjects/Subjects.vue'
 import Badges from '@/components/badges/Badges.vue'
 import Levels from '@/components/levels/Levels.vue'
 import Users from '@/components/users/Users.vue'
+import HelpInboxPage from '@/components/help/HelpInboxPage.vue'
+import HelpThreadPage from '@/components/help/HelpThreadPage.vue'
 import SelfReportPageNav from '@/components/skills/selfReport/SelfReportPageNav.vue'
 import SelfReportStatusPage from '@/components/skills/selfReport/SelfReportStatusPage.vue'
 import SelfReportConfigurePage from '@/components/skills/selfReport/SelfReportConfigurePage.vue'
@@ -449,6 +451,26 @@ const routes = [
           },
         },
       }],
+    }, {
+      name: 'ProjectHelp',
+      path: 'help',
+      component: HelpInboxPage,
+      meta: {
+        requiresAuth: true,
+        announcer: {
+          message: 'Project Help Requests',
+        },
+      },
+    }, {
+      name: 'ProjectHelpThread',
+      path: 'help/:helpId',
+      component: HelpThreadPage,
+      meta: {
+        requiresAuth: true,
+        announcer: {
+          message: 'Help Request',
+        },
+      },
     }, {
       path: '/administrator/projects/:projectId/self-report',
       component: SelfReportPageNav,

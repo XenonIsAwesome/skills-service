@@ -2572,6 +2572,47 @@ class SkillsService {
     def dismissAllWebNotifications() {
         return wsHelper.apiPost("/webNotifications/dismissAll", [])
     }
+    // --- help hub (student endpoints)
+    def createHelpRequest(String projectId, Map props) {
+        return wsHelper.apiPost("/projects/${projectId}/help", props).body
+    }
+    def getMyHelpRequests(String projectId) {
+        return wsHelper.apiGet("/projects/${projectId}/help/mine")
+    }
+    def getHelpRequest(String projectId, Integer helpId) {
+        return wsHelper.apiGet("/projects/${projectId}/help/${helpId}")
+    }
+    def replyToHelpRequest(String projectId, Integer helpId, String body) {
+        return wsHelper.apiPost("/projects/${projectId}/help/${helpId}/replies", [body: body]).body
+    }
+    def resolveHelpRequest(String projectId, Integer helpId) {
+        return wsHelper.apiPost("/projects/${projectId}/help/${helpId}/resolve", [:]).body
+    }
+    def reopenHelpRequest(String projectId, Integer helpId) {
+        return wsHelper.apiPost("/projects/${projectId}/help/${helpId}/reopen", [:]).body
+    }
+
+    // --- help hub (staff endpoints)
+    def getHelpRequestsAsStaff(String projectId, Map filters = [:], int limit = 10, int page = 1, String orderBy = 'created', boolean ascending = false) {
+        String query = filters.collect { k, v -> "${k}=${v}" }.join('&')
+        return wsHelper.adminGet("/projects/${projectId}/help?limit=${limit}&page=${page}&orderBy=${orderBy}&ascending=${ascending}" + (query ? "&${query}" : ""))
+    }
+    def getHelpRequestAsStaff(String projectId, Integer helpId) {
+        return wsHelper.adminGet("/projects/${projectId}/help/${helpId}")
+    }
+    def getHelpStatsAsStaff(String projectId) {
+        return wsHelper.adminGet("/projects/${projectId}/help/stats")
+    }
+    def replyToHelpRequestAsStaff(String projectId, Integer helpId, String body) {
+        return wsHelper.adminPost("/projects/${projectId}/help/${helpId}/replies", [body: body]).body
+    }
+    def resolveHelpRequestAsStaff(String projectId, Integer helpId) {
+        return wsHelper.adminPost("/projects/${projectId}/help/${helpId}/resolve", [:]).body
+    }
+    def reopenHelpRequestAsStaff(String projectId, Integer helpId) {
+        return wsHelper.adminPost("/projects/${projectId}/help/${helpId}/reopen", [:]).body
+    }
+
     def createWebNotificationAsRoot(Map props) {
         return wsHelper.rootPost("/webNotifications/create", props)
     }
