@@ -63,7 +63,8 @@ class WebNotificationsService {
                 id: webNotification.id,
                 notifiedOn: webNotification.notifiedOn,
                 title: webNotification.title,
-                notification: webNotification.notification
+                notification: webNotification.notification,
+                link: webNotification.link
         )
     }
 

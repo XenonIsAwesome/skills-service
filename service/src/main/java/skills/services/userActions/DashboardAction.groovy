@@ -38,4 +38,7 @@ enum DashboardAction {
     ArchiveUser,
     RestoreArchivedUser,
     ManuallyAddSkillEvent,
+    Reply,
+    Resolve,
+    Reopen,
 }

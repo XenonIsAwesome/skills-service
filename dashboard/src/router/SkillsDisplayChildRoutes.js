@@ -25,6 +25,8 @@ import SkillsGroupPage from "@/skills-display/components/skill/SkillsGroupPage.v
 import SkillTagPage from '@/skills-display/components/skill/tags/SkillTagPage.vue'
 import SkillTagsPage from '@/skills-display/components/skill/tags/SkillTagsPage.vue'
 import LearningPathPage from '@/skills-display/components/learning-path/LearningPathPage.vue'
+import MyQuestionsPage from '@/skills-display/components/help/MyQuestionsPage.vue'
+import MyQuestionPage from '@/skills-display/components/help/MyQuestionPage.vue'
 
 const createSkillsDisplayChildRoutes = (appendToName, startWithSlash = false) => {
 
@@ -164,6 +166,28 @@ const createSkillsDisplayChildRoutes = (appendToName, startWithSlash = false) =>
       nonAdmin: true,
       announcer: {
         message: 'Learning Path'
+      }
+    }
+  }, {
+    name: `myHelpQuestions${appendToName}`,
+    path: `${prependToPath}help`,
+    component: MyQuestionsPage,
+    meta: {
+      requiresAuth: true,
+      nonAdmin: true,
+      announcer: {
+        message: 'My Questions'
+      }
+    }
+  }, {
+    name: `myHelpQuestion${appendToName}`,
+    path: `${prependToPath}help/:id`,
+    component: MyQuestionPage,
+    meta: {
+      requiresAuth: true,
+      nonAdmin: true,
+      announcer: {
+        message: 'My Question'
       }
     }
   }, {

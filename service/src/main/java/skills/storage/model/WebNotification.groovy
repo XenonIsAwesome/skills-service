@@ -43,6 +43,9 @@ class WebNotification {
     String title
     String notification
 
+    // optional deep link (dashboard-relative path) to navigate to when the notification is clicked
+    String link
+
     @CreatedDate
     Date created
 

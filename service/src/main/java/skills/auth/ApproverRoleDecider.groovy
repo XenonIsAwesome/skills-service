@@ -29,6 +29,7 @@ class ApproverRoleDecider {
                 (
                         requestAttributes.isSupportedHttpMethod()
                         || requestAttributes.isSelfReportAction()
+                        || requestAttributes.isHelpAction()
                         || requestAttributes.isSelfReportEmailSubscriptionAction()
                 )
     }

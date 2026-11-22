@@ -245,6 +245,10 @@ const onPopoverShow = () => {
               <div class="flex-1 ">
                 <markdown-text :text="notification.notification" data-cy="notifText"
                                :instance-id="`${notification.id}`"/>
+                <router-link v-if="notification.link" :to="notification.link" class="text-sm font-medium"
+                             data-cy="notifLink" @click="notificationsPopover.hide()">
+                  View
+                </router-link>
               </div>
               <div class="pt-2">
                 <SkillsButton severity="warn" icon="fa-solid fa-trash" size="small"

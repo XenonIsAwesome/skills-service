@@ -17,6 +17,7 @@ limitations under the License.
 import {computed, defineAsyncComponent, onMounted, ref, watch} from 'vue'
 import SkillsTitle from '@/skills-display/components/utilities/SkillsTitle.vue'
 import {onBeforeRouteLeave, useRoute} from 'vue-router'
+import AskForHelpButton from '@/skills-display/components/help/AskForHelpButton.vue'
 import {useSkillsDisplayService} from '@/skills-display/services/UseSkillsDisplayService.js'
 import {useSkillsDisplayInfo} from '@/skills-display/UseSkillsDisplayInfo.js'
 import SkillProgress from '@/skills-display/components/progress/SkillProgress.vue'
@@ -109,6 +110,7 @@ const groupLink = computed(() => {
   <div>
     <div v-if="!isLoading">
       <skills-title>{{ attributes.skillDisplayName }} Overview</skills-title>
+      <ask-for-help-button v-if="skill.projectId === attributes.projectId" class="mt-3" scope-type="SKILL" :skill-id="skill.skillId" :scope-name="skill.skill" />
       <Card class="mt-4" :pt="{
         content: { class: 'px-5 pt-5 pb-2' },
         header: { class: 'border-b-1 px-5 py-4' },

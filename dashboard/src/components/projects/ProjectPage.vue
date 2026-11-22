@@ -30,6 +30,7 @@ import UserRolesUtil from '@/components/utils/UserRolesUtil'
 import Avatar from 'primevue/avatar'
 import ProjectShareDialog from '@/components/projects/ProjectShareDialog.vue'
 import ProjectExpirationWarning from '@/components/projects/ProjectExpirationWarning.vue'
+import { useHelpStatsState } from '@/stores/UseHelpStatsState.js'
 import PointsBasedLevelsWarning from "@/components/levels/PointsBasedLevelsWarning.vue";
 
 // const props = defineProps(['project'])
@@ -39,6 +40,7 @@ const projConfig = useProjConfig()
 const appConfig = useAppConfig()
 const announcer = useSkillsAnnouncer()
 const projectDetailsState = useProjDetailsState()
+const helpStats = useHelpStatsState()
 
 
 const cancellingExpiration = ref(false)
@@ -55,6 +57,7 @@ const isLoading = computed(() => {
 
 onMounted(() => {
   projectDetailsState.loadProjectDetailsState(true)
+  helpStats.loadStats(route.params.projectId)
 })
 
 const navItems = computed(() => {
@@ -62,6 +65,7 @@ const navItems = computed(() => {
     { name: 'Subjects', iconClass: 'fa-cubes skills-color-subjects', page: 'Subjects' },
     { name: 'Badges', iconClass: 'fa-award skills-color-badges', page: 'Badges' },
     { name: 'Self Report', iconClass: 'fa-laptop skills-color-selfreport', page: 'SelfReport' },
+    { name: 'Help', iconClass: 'fa-question-circle', page: 'ProjectHelp', badgeCount: helpStats.openCount },
     { name: 'Learning Path', iconClass: 'fa-project-diagram skills-color-dependencies', page: 'FullDependencyGraph' },
     { name: 'Skill Tags', iconClass: 'fa-tags', page: 'SkillTags' },
   ]

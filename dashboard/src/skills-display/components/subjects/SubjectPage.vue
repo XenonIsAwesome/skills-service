@@ -18,6 +18,7 @@ import SkillsTitle from '@/skills-display/components/utilities/SkillsTitle.vue'
 import { useSkillsDisplaySubjectState } from '@/skills-display/stores/UseSkillsDisplaySubjectState.js'
 import { onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import AskForHelpButton from '@/skills-display/components/help/AskForHelpButton.vue'
 import UserOverallProgress from '@/skills-display/components/home/UserOverallProgress.vue'
 import { tryOnBeforeMount } from '@vueuse/core'
 import MarkdownText from '@/common-components/utilities/markdown/MarkdownText.vue'
@@ -46,6 +47,8 @@ watch( () => route.params.subjectId, () => {
     <skills-spinner :is-loading="subject.loadingSubjectSummary" />
     <div v-if="!subject.loadingSubjectSummary">
       <skills-title>{{  subject.subjectSummary.subject }}</skills-title>
+      <ask-for-help-button class="mt-3" scope-type="SUBJECT" :skill-id="route.params.subjectId"
+                           :scope-name="subject.subjectSummary.subject" />
       <div class="mt-4">
         <user-overall-progress :is-subject="true"/>
       </div>

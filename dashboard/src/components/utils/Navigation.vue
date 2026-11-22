@@ -117,6 +117,9 @@ watch(() => props.navItems, () => {
                       <i :class="`${navItem.iconClass} ${colors.getTextClass(index)}${isExactActive ? ' text-primary bg-primary-contrast rounded-border border py-1' : ''}${!showCollapsed ? ' mr-2' : ' text-[1.3rem]'} `"
                          class="fas w-8!"
                          aria-hidden="true"/> <span v-if="!showCollapsed" class="">{{ navItem.name }}</span>
+                      <Badge v-if="navItem.badgeCount > 0" :value="navItem.badgeCount" severity="warn"
+                             :class="showCollapsed ? '' : 'ml-2'" :data-cy="`navBadge-${navItem.name}`"
+                             :aria-label="`${navItem.badgeCount} open`" />
                     </div>
                   </Button>
                 </li>

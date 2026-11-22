@@ -26,6 +26,7 @@ import SubjectTiles from '@/skills-display/components/subjects/SubjectTiles.vue'
 import ProjectDescription from '@/skills-display/components/home/ProjectDescription.vue'
 import { useSkillsDisplayAttributesState } from '@/skills-display/stores/UseSkillsDisplayAttributesState.js'
 import MyBadges from '@/skills-display/components/badges/MyBadges.vue'
+import AskForHelpButton from '@/skills-display/components/help/AskForHelpButton.vue'
 import TranscriptCard from '@/skills-display/components/userTranscript/TranscriptCard.vue'
 import TagList from "@/skills-display/components/skill/tags/TagList.vue";
 import { useUserProgressInitialization } from '@/skills-display/UseUserProgressInitialization.js'
@@ -61,6 +62,7 @@ const hasBadges = computed(() => {
     <skills-spinner :is-loading="userProgress.loadingUserProgressSummary"/>
     <div v-if="!userProgress.loadingUserProgressSummary">
       <skills-title :back-button="false">{{ skillsDisplayTheme.landingPageTitle }}</skills-title>
+      <ask-for-help-button class="mt-3" scope-type="PROJECT" show-my-questions />
       <Card v-if="isProgressPending"
                :pt="{ root: { role: 'status', 'aria-live': 'polite', 'aria-atomic': 'true' }, body: { class: 'p-0!' }, content: { class: 'p-0!' } }"
                class="mt-3"

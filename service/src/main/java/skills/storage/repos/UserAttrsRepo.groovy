@@ -26,6 +26,8 @@ interface UserAttrsRepo extends CrudRepository<UserAttrs, Integer> {
     @Nullable
     UserAttrs findByUserIdIgnoreCase(String userId)
 
+    List<UserAttrs> findAllByUserIdIn(Collection<String> userIds)
+
     @Nullable
     @Query('''select attrs from UserAttrs attrs, User user where attrs.userId = user.userId and user.id = ?1''')
     UserAttrs findUserAttrsByUserTableRefId(Integer userTableRefId)
